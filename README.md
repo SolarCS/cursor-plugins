@@ -25,9 +25,13 @@ Add more servers by editing `mcp.json` — no separate plugin per integration.
 1. Push to `SolarCS/cursor-plugins`.
 2. **Cursor Dashboard → Settings → Plugins → Team Marketplaces → Add Marketplace**
 3. **Import from Repo** → `https://github.com/SolarCS/cursor-plugins`
-4. Grant the **Cursor GitHub App** read access.
-5. Add **CipherHealth Integrations** to the marketplace.
-6. Set **Team Access** to your trial group → **Required** → Save.
+4. Grant the **Cursor GitHub App** read access to this repo.
+5. Cursor reads `.cursor-plugin/marketplace.json` and should discover **CipherHealth Integrations** automatically. If not, use **Add to Marketplace**.
+6. Set **Team Access** to a distribution group that includes **all** trial users → **Required** → **Save**.
+
+GitHub repo access for org members is **not** the same as Cursor **Team Access**. Teammates only receive the plugin when their Cursor account is in the assigned distribution group.
+
+See [TEAM-TROUBLESHOOTING.md](./TEAM-TROUBLESHOOTING.md) if the plugin works for admins but not teammates.
 
 ### Optional: reduce env-var setup (private repo)
 
@@ -56,9 +60,20 @@ launchctl setenv SF_CLIENT_ID "..."
 
 [Team MCP Not Syncing](https://forum.cursor.com/t/team-mcp-not-syncing/160512) — use team marketplace plugins as Cursor's recommended workaround.
 
+## Repository structure
+
+```
+.cursor-plugin/
+  marketplace.json          # team marketplace registry (required for import)
+  plugin.json               # cipherhealth-integrations manifest
+skills/
+mcp.json
+```
+
 ## Maintainers
 
-- Bump `version` in `.cursor-plugin/plugin.json` when changing `mcp.json`.
+- Bump `version` in `.cursor-plugin/plugin.json` when changing `mcp.json` or skills.
+- Bump `metadata.version` in `.cursor-plugin/marketplace.json` when changing marketplace-level config.
 - Enable **Auto Refresh** on the team marketplace for pushes to `main`.
 
 Internal use only — CipherHealth / SolarCS.
