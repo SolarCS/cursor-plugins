@@ -5,14 +5,25 @@
     "name": "SolarCS"
   },
   "metadata": {
-    "description": "Team MCP bundle for the CipherHealth trial — Salesforce, Google Workspace, ZoomInfo, Seismic, and Looker.",
-    "version": "1.0.0"
+    "description": "CipherHealth trial MCP plugins — Salesforce, ZoomInfo, and Seismic.",
+    "version": "2.0.0",
+    "pluginRoot": "plugins"
   },
   "plugins": [
     {
-      "name": "cipherhealth-integrations",
-      "source": ".",
-      "description": "Team MCP bundle for the CipherHealth trial — CRM, Google Workspace, ZoomInfo, Seismic, and Looker in one plugin."
+      "name": "cipherhealth-salesforce",
+      "source": "salesforce",
+      "description": "Salesforce hosted MCP (read-only) and query skills for CipherHealth CRM."
+    },
+    {
+      "name": "cipherhealth-zoominfo",
+      "source": "zoominfo",
+      "description": "ZoomInfo MCP for company and contact research and list building."
+    },
+    {
+      "name": "cipherhealth-seismic",
+      "source": "seismic",
+      "description": "Seismic MCP for CipherHealth sales content and enablement assets."
     }
   ]
 }

@@ -1,0 +1,13 @@
+{
+  "name": "cipherhealth-zoominfo",
+  "displayName": "CipherHealth ZoomInfo",
+  "description": "ZoomInfo MCP for company and contact research, list building, and account intelligence.",
+  "version": "1.0.0",
+  "author": {
+    "name": "CipherHealth"
+  },
+  "keywords": ["zoominfo", "mcp", "sales", "cipherhealth"],
+  "license": "UNLICENSED",
+  "skills": "./skills/",
+  "mcp": "./mcp.json"
+}

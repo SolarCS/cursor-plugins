@@ -7,18 +7,18 @@ Use this guide when **CipherHealth Integrations** works for admins but not for o
 | System | What it controls |
 |--------|------------------|
 | **GitHub repo access** | Lets the Cursor GitHub App read the repo for the admin dashboard |
-| **Cursor Team Access groups** | Controls which Cursor users receive the plugin in their IDE |
+| **Cursor Marketplace Access** | Controls which Cursor team members can see and receive plugins from this marketplace |
 
-Granting GitHub access to all org members does **not** install the plugin. Admins must assign it in the Cursor dashboard.
+Granting GitHub access to all org members does **not** install the plugin. Admins must configure **Marketplace Access** in the Cursor dashboard.
 
 ## Admin checklist
 
 1. **Cursor Dashboard → Settings → Plugins → Team Marketplaces**
-2. Confirm **CipherHealth Integrations** is listed with skills and MCP servers visible.
-3. Open **Team Access** and select a distribution group that includes **every** trial user.
+2. Confirm all three plugins are listed: **CipherHealth Salesforce**, **CipherHealth ZoomInfo**, **CipherHealth Seismic**.
+3. Set **Marketplace Access** to **All Members** (or a group that includes every trial user).
 4. Set the plugin to **Required** (auto-install) or **Optional** (user installs from Customize).
 5. Click **Save** — changes are not live until saved.
-6. Confirm teammates are in that distribution group under **Dashboard → Members**.
+6. If using a specific group (not All Members), confirm teammates are in that group under **Dashboard → Members**.
 
 After saving, ask teammates to fully quit Cursor (**Cmd+Q**) and reopen.
 
@@ -33,7 +33,7 @@ After saving, ask teammates to fully quit Cursor (**Cmd+Q**) and reopen.
 
 For private GitHub repos, Cursor downloads plugin files by running `git clone` on **each user's machine**. Dashboard GitHub App access does not carry over to that step.
 
-**Symptoms:** Plugin name appears in Customize, but skills/MCP/rules never load. `/team-integrations-setup` is not recognized.
+**Symptoms:** Plugin name appears in Customize, but skills/MCP/rules never load. `/salesforce-queries` or other skills are not recognized.
 
 **Diagnose on the teammate's machine:**
 

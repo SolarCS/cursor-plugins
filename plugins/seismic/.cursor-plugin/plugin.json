@@ -1,0 +1,13 @@
+{
+  "name": "cipherhealth-seismic",
+  "displayName": "CipherHealth Seismic",
+  "description": "Seismic MCP for CipherHealth sales content — decks, enablement assets, and tenant search.",
+  "version": "1.0.0",
+  "author": {
+    "name": "CipherHealth"
+  },
+  "keywords": ["seismic", "mcp", "sales", "cipherhealth"],
+  "license": "UNLICENSED",
+  "skills": "./skills/",
+  "mcp": "./mcp.json"
+}

@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "Salesforce": {
+      "url": "https://api.salesforce.com/platform/mcp/v1/platform/sobject-reads",
+      "auth": {
+        "CLIENT_ID": "3MVG9zeKbAVObYjMb5ky5Pui_GYkEBitPbHPIVoMfsli8v4fl5dtak4s_OKiCySi4bKYaiKumUjIL84ZExk9f"
+      }
+    }
+  }
+}

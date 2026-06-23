@@ -1,78 +1,70 @@
 # CipherHealth Cursor Plugins
 
-Private team marketplace plugin for the CipherHealth trial. One plugin, **multiple MCP servers** — auto-installed when marked **Required** for your trial group.
+Private team marketplace for the CipherHealth trial. Three plugins — **Salesforce**, **ZoomInfo**, and **Seismic** — each with its own MCP server and setup skill.
 
 **Repo:** [github.com/SolarCS/cursor-plugins](https://github.com/SolarCS/cursor-plugins)
 
-## Bundled MCP servers
+## Plugins
 
-| Server | Endpoint | Auth |
-|--------|----------|------|
-| **Salesforce** | `platform/sobject-reads` (read-only CRM) | `SF_CLIENT_ID` + OAuth |
-| **ZoomInfo** | `mcp.zoominfo.com` | OAuth on connect |
-| **Google Calendar** | `calendarmcp.googleapis.com/mcp/v1` | OAuth on connect |
-| **Gmail** | `gmailmcp.googleapis.com/mcp/v1` | OAuth on connect |
-| **Google Drive** | `drivemcp.googleapis.com/mcp/v1` | OAuth on connect |
-| **Seismic** | `mcp.seismic.com/.../cipherhealth.com` | OAuth on connect |
-| **looker-toolbox** | `qaloadcipherhealth.cloud.looker.com/mcp` | OAuth on connect |
+| Plugin | MCP server | Auth |
+|--------|------------|------|
+| **CipherHealth Salesforce** | `platform/sobject-reads` (read-only CRM) | OAuth on connect (Consumer Key bundled) |
+| **CipherHealth ZoomInfo** | `mcp.zoominfo.com` | OAuth on connect |
+| **CipherHealth Seismic** | `mcp.seismic.com/.../cipherhealth.com` | OAuth on connect |
 
-Only **Salesforce** requires an env var (`SF_CLIENT_ID`). All other servers authenticate when each user clicks **Connect** in Settings → Tools & MCP.
-
-Add more servers by editing `mcp.json` — no separate plugin per integration.
+No env vars required. Each user connects via **Settings → Tools & MCP → Connect**.
 
 ## Admin: publish to team marketplace
 
 1. Push to `SolarCS/cursor-plugins`.
-2. **Cursor Dashboard → Settings → Plugins → Team Marketplaces → Add Marketplace**
-3. **Import from Repo** → `https://github.com/SolarCS/cursor-plugins`
+2. **Cursor Dashboard → Settings → Plugins → Team Marketplaces**
+3. **Import from Repo** (or **Refresh** if already imported) → `https://github.com/SolarCS/cursor-plugins`
 4. Grant the **Cursor GitHub App** read access to this repo.
-5. Cursor reads `.cursor-plugin/marketplace.json` and should discover **CipherHealth Integrations** automatically. If not, use **Add to Marketplace**.
-6. Set **Team Access** to a distribution group that includes **all** trial users → **Required** → **Save**.
+5. Cursor reads `.cursor-plugin/marketplace.json` and discovers all three plugins.
+6. Set **Marketplace Access** to **All Members**.
+7. Mark each plugin **Required** (or **Optional** per role) → **Save**.
 
-GitHub repo access for org members is **not** the same as Cursor **Team Access**. Teammates only receive the plugin when their Cursor account is in the assigned distribution group.
+After this restructure, re-import or refresh the marketplace so the old **CipherHealth Integrations** bundle is replaced by the three individual plugins.
 
-See [TEAM-TROUBLESHOOTING.md](./TEAM-TROUBLESHOOTING.md) if the plugin works for admins but not teammates.
-
-### Optional: reduce env-var setup (private repo)
-
-Hardcode `SF_CLIENT_ID` in `mcp.json` (Consumer Key only) so trial users only need OAuth connects.
+See [TEAM-TROUBLESHOOTING.md](./TEAM-TROUBLESHOOTING.md) if plugins work for admins but not teammates.
 
 ## Trial user: first run
 
-1. Plugin auto-installs (if **Required**).
-2. Set `SF_CLIENT_ID` (Salesforce only), **Cmd+Q** Cursor, reopen.
-3. **Settings → Tools & MCP → Connect** for each server (7 total).
-4. Test in chat.
-
-```bash
-launchctl setenv SF_CLIENT_ID "..."
-```
+1. Plugins auto-install (if **Required**).
+2. **Settings → Tools & MCP → Connect** for **Salesforce**, **zoominfo**, and **Seismic**.
+3. Test in chat.
 
 ## Skills included
 
-| Skill | Purpose |
-|-------|---------|
-| `team-integrations-setup` | Connect all bundled MCPs |
-| `salesforce-queries` | Account briefs and SOQL patterns |
-| `salesforce-setup` | Salesforce troubleshooting |
-
-## Why plugins instead of Team MCP dashboard?
-
-[Team MCP Not Syncing](https://forum.cursor.com/t/team-mcp-not-syncing/160512) — use team marketplace plugins as Cursor's recommended workaround.
+| Plugin | Skills |
+|--------|--------|
+| Salesforce | `salesforce-setup`, `salesforce-queries` |
+| ZoomInfo | `zoominfo-setup` |
+| Seismic | `seismic-setup` |
 
 ## Repository structure
 
 ```
 .cursor-plugin/
-  marketplace.json          # team marketplace registry (required for import)
-  plugin.json               # cipherhealth-integrations manifest
-skills/
-mcp.json
+  marketplace.json
+plugins/
+  salesforce/
+    .cursor-plugin/plugin.json
+    mcp.json
+    skills/
+  zoominfo/
+    .cursor-plugin/plugin.json
+    mcp.json
+    skills/
+  seismic/
+    .cursor-plugin/plugin.json
+    mcp.json
+    skills/
 ```
 
 ## Maintainers
 
-- Bump `version` in `.cursor-plugin/plugin.json` when changing `mcp.json` or skills.
+- Bump `version` in each plugin's `.cursor-plugin/plugin.json` when changing that plugin's `mcp.json` or skills.
 - Bump `metadata.version` in `.cursor-plugin/marketplace.json` when changing marketplace-level config.
 - Enable **Auto Refresh** on the team marketplace for pushes to `main`.
 

@@ -1,0 +1,13 @@
+{
+  "name": "cipherhealth-salesforce",
+  "displayName": "CipherHealth Salesforce",
+  "description": "Salesforce hosted MCP (read-only) and query skills for CipherHealth CRM — account briefs, pipeline, and contacts.",
+  "version": "2.0.0",
+  "author": {
+    "name": "CipherHealth"
+  },
+  "keywords": ["salesforce", "mcp", "crm", "soql", "cipherhealth"],
+  "license": "UNLICENSED",
+  "skills": "./skills/",
+  "mcp": "./mcp.json"
+}

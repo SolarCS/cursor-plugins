@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "Seismic": {
+      "url": "https://mcp.seismic.com/v1/tenants/cipherhealth.com"
+    }
+  }
+}

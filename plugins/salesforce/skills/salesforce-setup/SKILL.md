@@ -8,29 +8,16 @@ description: >-
 
 # CipherHealth Salesforce MCP setup
 
-## 1. Environment variable (before opening Cursor)
-
-The plugin reads the Consumer Key from `SF_CLIENT_ID`:
-
-```bash
-# macOS — persists across app launches from Dock/Spotlight
-launchctl setenv SF_CLIENT_ID "YOUR_CONSUMER_KEY"
-
-# Then fully quit Cursor (Cmd+Q) and reopen
-```
-
-Verify: `launchctl getenv SF_CLIENT_ID`
-
-If your External Client App requires a secret, also set `SF_CLIENT_SECRET`.
-
-## 2. Connect in Cursor
+## 1. Connect in Cursor
 
 1. **Settings → Tools & MCP**
 2. Find **Salesforce** (from the CipherHealth Salesforce plugin)
 3. Toggle on if disabled
 4. Click **Connect** and complete Salesforce OAuth in the browser
 
-## 3. Verify
+The Consumer Key is bundled in the plugin — no env vars required.
+
+## 2. Verify
 
 Ask the agent to run `getUserInfo` or a test query:
 
@@ -44,7 +31,6 @@ SELECT Id, Name FROM Account LIMIT 1
 |---------|-----|
 | `Server definition not found` | URL must be `.../platform/sobject-reads` (with **s**) |
 | Server errored / 405 | Complete OAuth via Settings → Connect (not just chat) |
-| Auth fails silently | Confirm `SF_CLIENT_ID` is set **before** Cursor starts |
 | Tools missing | Plugin not installed — check team marketplace or install locally |
 
 ## Salesforce admin checklist
