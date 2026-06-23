@@ -10,13 +10,13 @@ Private team marketplace plugin for the CipherHealth trial. One plugin, **multip
 |--------|----------|------|
 | **Salesforce** | `platform/sobject-reads` (read-only CRM) | `SF_CLIENT_ID` + OAuth |
 | **ZoomInfo** | `mcp.zoominfo.com` | OAuth on connect |
-| **Google Calendar** | `calendarmcp.googleapis.com/mcp/v1` | `GOOGLE_MCP_*` + OAuth |
-| **Gmail** | `gmailmcp.googleapis.com/mcp/v1` | `GOOGLE_MCP_*` + OAuth |
-| **Google Drive** | `drivemcp.googleapis.com/mcp/v1` | `GOOGLE_MCP_*` + OAuth |
+| **Google Calendar** | `calendarmcp.googleapis.com/mcp/v1` | OAuth on connect |
+| **Gmail** | `gmailmcp.googleapis.com/mcp/v1` | OAuth on connect |
+| **Google Drive** | `drivemcp.googleapis.com/mcp/v1` | OAuth on connect |
 | **Seismic** | `mcp.seismic.com/.../cipherhealth.com` | OAuth on connect |
-| **looker-toolbox** | `qaloadcipherhealth.cloud.looker.com/mcp` | `CLIENT_ID: cursor_mcp` + OAuth |
+| **looker-toolbox** | `qaloadcipherhealth.cloud.looker.com/mcp` | OAuth on connect |
 
-One Google OAuth app can cover Calendar, Gmail, and Drive (same `GOOGLE_MCP_CLIENT_ID` / `GOOGLE_MCP_CLIENT_SECRET`).
+Only **Salesforce** requires an env var (`SF_CLIENT_ID`). All other servers authenticate when each user clicks **Connect** in Settings → Tools & MCP.
 
 Add more servers by editing `mcp.json` — no separate plugin per integration.
 
@@ -31,23 +31,18 @@ Add more servers by editing `mcp.json` — no separate plugin per integration.
 
 ### Optional: reduce env-var setup (private repo)
 
-- Hardcode `SF_CLIENT_ID` in `mcp.json` (Consumer Key only).
-- Looker `CLIENT_ID` is already set to `cursor_mcp`.
+Hardcode `SF_CLIENT_ID` in `mcp.json` (Consumer Key only) so trial users only need OAuth connects.
 
 ## Trial user: first run
 
 1. Plugin auto-installs (if **Required**).
-2. Set env vars (see `.env.example`), **Cmd+Q** Cursor, reopen.
+2. Set `SF_CLIENT_ID` (Salesforce only), **Cmd+Q** Cursor, reopen.
 3. **Settings → Tools & MCP → Connect** for each server (7 total).
 4. Test in chat.
 
 ```bash
 launchctl setenv SF_CLIENT_ID "..."
-launchctl setenv GOOGLE_MCP_CLIENT_ID "..."
-launchctl setenv GOOGLE_MCP_CLIENT_SECRET "..."
 ```
-
-**Note:** If you previously used `GOOGLE_CALENDAR_CLIENT_ID`, rename to `GOOGLE_MCP_CLIENT_ID` (shared across all Google MCPs).
 
 ## Skills included
 

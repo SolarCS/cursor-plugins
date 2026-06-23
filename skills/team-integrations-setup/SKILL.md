@@ -9,35 +9,30 @@ description: >-
 
 # CipherHealth team MCP setup
 
-This plugin bundles **seven MCP servers** in one `mcp.json`. Install the plugin once, set env vars (if needed), then connect each server via OAuth in Settings.
+This plugin bundles **seven MCP servers** in one `mcp.json`. Most use **OAuth on connect** — no env vars. Only Salesforce needs a Consumer Key before launch.
 
-## 1. Environment variables (before opening Cursor)
+## 1. Salesforce env var (before opening Cursor)
 
 ```bash
-# Salesforce Consumer Key (External Client App)
 launchctl setenv SF_CLIENT_ID "YOUR_CONSUMER_KEY"
-
-# Google OAuth app — shared by Calendar, Gmail, and Drive MCP
-launchctl setenv GOOGLE_MCP_CLIENT_ID "YOUR_CLIENT_ID"
-launchctl setenv GOOGLE_MCP_CLIENT_SECRET "YOUR_CLIENT_SECRET"
 ```
 
 Fully quit Cursor (**Cmd+Q**) and reopen.
 
-**No env vars needed:** ZoomInfo, Seismic (OAuth on connect), Looker (`CLIENT_ID` is in `mcp.json`).
+**OAuth only (no env vars):** Google Calendar, Gmail, Google Drive, ZoomInfo, Seismic, Looker.
 
 ## 2. Connect each server
 
-**Settings → Tools & MCP** — connect every server from this plugin:
+**Settings → Tools & MCP** — click **Connect** for every server:
 
 | Server | Auth |
 |--------|------|
-| **Salesforce** | OAuth → CipherHealth Salesforce |
+| **Salesforce** | `SF_CLIENT_ID` env + OAuth |
 | **zoominfo** | OAuth |
 | **Google Calendar** | OAuth (Google account) |
 | **Gmail** | OAuth (Google account) |
 | **Google Drive** | OAuth (Google account) |
-| **Seismic** | OAuth (Seismic / cipherhealth.com tenant) |
+| **Seismic** | OAuth (cipherhealth.com tenant) |
 | **looker-toolbox** | OAuth (Looker instance) |
 
 Toggle servers on if disabled.
@@ -46,22 +41,16 @@ Toggle servers on if disabled.
 
 - **Salesforce:** `getUserInfo` or `SELECT Id, Name FROM Account LIMIT 1`
 - **Google Calendar:** `list_calendars`
-- **Gmail / Drive:** list tools after connect; try a read-only action
-- **ZoomInfo / Seismic / Looker:** confirm tools appear after Connect
-
-## Adding more MCP servers
-
-Edit `mcp.json` in [SolarCS/cursor-plugins](https://github.com/SolarCS/cursor-plugins) and push. Do **not** create a separate plugin per MCP.
+- **Gmail / Drive / ZoomInfo / Seismic / Looker:** tools appear after Connect
 
 ## Common failures
 
 | Symptom | Fix |
 |---------|-----|
-| No MCP servers from plugin | Plugin not installed — check team marketplace **Required** |
-| Salesforce 404 | URL must end in `sobject-reads` (plural) |
-| Google MCP auth fails | Same OAuth app must allow Calendar/Gmail/Drive MCP redirect URLs |
-| Looker fails | Confirm `cursor_mcp` client is registered on Looker instance |
-| Seismic fails | User must have access to `cipherhealth.com` Seismic tenant |
-| Empty auth | Env vars must be set **before** Cursor starts |
+| No MCP servers from plugin | Check team marketplace **Required** install |
+| Salesforce 404 | URL must end in `sobject-reads` |
+| Google / Looker OAuth fails | Connect via **Settings → Tools & MCP**, not chat |
+| Seismic fails | User needs access to cipherhealth.com tenant |
+| Salesforce empty auth | Set `SF_CLIENT_ID` before Cursor starts |
 
 See **salesforce-setup** for Salesforce admin checklist.

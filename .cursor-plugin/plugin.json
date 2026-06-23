@@ -2,7 +2,7 @@
   "name": "cipherhealth-integrations",
   "displayName": "CipherHealth Integrations",
   "description": "Team MCP bundle for the CipherHealth trial — CRM, Google Workspace, ZoomInfo, Seismic, and Looker in one plugin.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": {
     "name": "CipherHealth"
   },
