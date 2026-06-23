@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "Salesforce": {
+      "url": "https://api.salesforce.com/platform/mcp/v1/platform/sobject-reads",
+      "auth": {
+        "CLIENT_ID": "${env:SF_CLIENT_ID}"
+      }
+    },
+    "zoominfo": {
+      "url": "https://mcp.zoominfo.com/mcp"
+    },
+    "Google Calendar": {
+      "url": "https://calendarmcp.googleapis.com/mcp/v1",
+      "auth": {
+        "CLIENT_ID": "${env:GOOGLE_CALENDAR_CLIENT_ID}",
+        "CLIENT_SECRET": "${env:GOOGLE_CALENDAR_CLIENT_SECRET}"
+      }
+    }
+  }
+}
