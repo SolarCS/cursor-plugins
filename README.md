@@ -8,33 +8,46 @@ Private team marketplace plugin for the CipherHealth trial. One plugin, **multip
 
 | Server | Endpoint | Auth |
 |--------|----------|------|
-| **Salesforce** | `platform/sobject-reads` (read-only CRM) | `SF_CLIENT_ID` env + OAuth |
+| **Salesforce** | `platform/sobject-reads` (read-only CRM) | `SF_CLIENT_ID` + OAuth |
 | **ZoomInfo** | `mcp.zoominfo.com` | OAuth on connect |
-| **Google Calendar** | Google Calendar MCP | `GOOGLE_CALENDAR_*` env + OAuth |
+| **Google Calendar** | `calendarmcp.googleapis.com/mcp/v1` | `GOOGLE_MCP_*` + OAuth |
+| **Gmail** | `gmailmcp.googleapis.com/mcp/v1` | `GOOGLE_MCP_*` + OAuth |
+| **Google Drive** | `drivemcp.googleapis.com/mcp/v1` | `GOOGLE_MCP_*` + OAuth |
+| **Seismic** | `mcp.seismic.com/.../cipherhealth.com` | OAuth on connect |
+| **looker-toolbox** | `qaloadcipherhealth.cloud.looker.com/mcp` | `CLIENT_ID: cursor_mcp` + OAuth |
 
-Add more servers by editing `mcp.json` — no need for a separate plugin per integration.
+One Google OAuth app can cover Calendar, Gmail, and Drive (same `GOOGLE_MCP_CLIENT_ID` / `GOOGLE_MCP_CLIENT_SECRET`).
+
+Add more servers by editing `mcp.json` — no separate plugin per integration.
 
 ## Admin: publish to team marketplace
 
-1. Push this repo to `SolarCS/cursor-plugins` (private org repo).
+1. Push to `SolarCS/cursor-plugins`.
 2. **Cursor Dashboard → Settings → Plugins → Team Marketplaces → Add Marketplace**
 3. **Import from Repo** → `https://github.com/SolarCS/cursor-plugins`
-4. Grant the **Cursor GitHub App** read access on the repo.
-5. Add plugin **CipherHealth Integrations** to the marketplace.
-6. Set **Team Access** to your trial distribution group.
-7. Set install mode to **Required** (auto-installs MCP config for all participants).
-8. Save.
+4. Grant the **Cursor GitHub App** read access.
+5. Add **CipherHealth Integrations** to the marketplace.
+6. Set **Team Access** to your trial group → **Required** → Save.
 
-### Optional: zero env-var friction (private repo only)
+### Optional: reduce env-var setup (private repo)
 
-Replace `${env:SF_CLIENT_ID}` in `mcp.json` with the literal Consumer Key. Acceptable in a private org repo; the key is not the client secret.
+- Hardcode `SF_CLIENT_ID` in `mcp.json` (Consumer Key only).
+- Looker `CLIENT_ID` is already set to `cursor_mcp`.
 
 ## Trial user: first run
 
-1. Plugin auto-installs (if Required) — or install from the marketplace panel.
-2. Set env vars (see `.env.example`), then **Cmd+Q** and reopen Cursor.
-3. **Settings → Tools & MCP** → **Connect** for Salesforce, ZoomInfo, and Google Calendar.
-4. Test in chat (e.g. *"What's on my calendar tomorrow?"* or *"Brief me on UCI Health from Salesforce"*).
+1. Plugin auto-installs (if **Required**).
+2. Set env vars (see `.env.example`), **Cmd+Q** Cursor, reopen.
+3. **Settings → Tools & MCP → Connect** for each server (7 total).
+4. Test in chat.
+
+```bash
+launchctl setenv SF_CLIENT_ID "..."
+launchctl setenv GOOGLE_MCP_CLIENT_ID "..."
+launchctl setenv GOOGLE_MCP_CLIENT_SECRET "..."
+```
+
+**Note:** If you previously used `GOOGLE_CALENDAR_CLIENT_ID`, rename to `GOOGLE_MCP_CLIENT_ID` (shared across all Google MCPs).
 
 ## Skills included
 
@@ -42,24 +55,15 @@ Replace `${env:SF_CLIENT_ID}` in `mcp.json` with the literal Consumer Key. Accep
 |-------|---------|
 | `team-integrations-setup` | Connect all bundled MCPs |
 | `salesforce-queries` | Account briefs and SOQL patterns |
-| `salesforce-setup` | Salesforce-specific troubleshooting |
+| `salesforce-setup` | Salesforce troubleshooting |
 
-## Why this instead of Team MCP dashboard?
+## Why plugins instead of Team MCP dashboard?
 
-[Team MCP Not Syncing](https://forum.cursor.com/t/team-mcp-not-syncing/160512) — dashboard saves config but IDE sync is still rolling out. **Team marketplace plugins** are Cursor's recommended workaround.
-
-## Local testing (before pushing)
-
-```bash
-mkdir -p ~/.cursor/plugins/local
-ln -sf "$(pwd)" ~/.cursor/plugins/local/cipherhealth-integrations
-launchctl setenv SF_CLIENT_ID "YOUR_KEY"
-# restart Cursor
-```
+[Team MCP Not Syncing](https://forum.cursor.com/t/team-mcp-not-syncing/160512) — use team marketplace plugins as Cursor's recommended workaround.
 
 ## Maintainers
 
-- Bump `version` in `.cursor-plugin/plugin.json` when changing `mcp.json` or skills.
-- Enable **Auto Refresh** on the team marketplace to pick up pushes to `main`.
+- Bump `version` in `.cursor-plugin/plugin.json` when changing `mcp.json`.
+- Enable **Auto Refresh** on the team marketplace for pushes to `main`.
 
 Internal use only — CipherHealth / SolarCS.

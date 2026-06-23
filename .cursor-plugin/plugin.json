@@ -1,8 +1,8 @@
 {
   "name": "cipherhealth-integrations",
   "displayName": "CipherHealth Integrations",
-  "description": "Team MCP bundle for the CipherHealth trial — Salesforce, ZoomInfo, and Google Calendar in one plugin.",
-  "version": "1.0.0",
+  "description": "Team MCP bundle for the CipherHealth trial — CRM, Google Workspace, ZoomInfo, Seismic, and Looker in one plugin.",
+  "version": "1.1.0",
   "author": {
     "name": "CipherHealth"
   },

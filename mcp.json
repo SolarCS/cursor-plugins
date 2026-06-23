@@ -12,8 +12,32 @@
     "Google Calendar": {
       "url": "https://calendarmcp.googleapis.com/mcp/v1",
       "auth": {
-        "CLIENT_ID": "${env:GOOGLE_CALENDAR_CLIENT_ID}",
-        "CLIENT_SECRET": "${env:GOOGLE_CALENDAR_CLIENT_SECRET}"
+        "CLIENT_ID": "${env:GOOGLE_MCP_CLIENT_ID}",
+        "CLIENT_SECRET": "${env:GOOGLE_MCP_CLIENT_SECRET}"
+      }
+    },
+    "Gmail": {
+      "url": "https://gmailmcp.googleapis.com/mcp/v1",
+      "auth": {
+        "CLIENT_ID": "${env:GOOGLE_MCP_CLIENT_ID}",
+        "CLIENT_SECRET": "${env:GOOGLE_MCP_CLIENT_SECRET}"
+      }
+    },
+    "Google Drive": {
+      "url": "https://drivemcp.googleapis.com/mcp/v1",
+      "auth": {
+        "CLIENT_ID": "${env:GOOGLE_MCP_CLIENT_ID}",
+        "CLIENT_SECRET": "${env:GOOGLE_MCP_CLIENT_SECRET}"
+      }
+    },
+    "Seismic": {
+      "url": "https://mcp.seismic.com/v1/tenants/cipherhealth.com"
+    },
+    "looker-toolbox": {
+      "type": "http",
+      "url": "https://qaloadcipherhealth.cloud.looker.com/mcp",
+      "auth": {
+        "CLIENT_ID": "cursor_mcp"
       }
     }
   }
