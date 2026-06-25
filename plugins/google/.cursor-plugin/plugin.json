@@ -1,0 +1,13 @@
+{
+  "name": "cipherhealth-google-marketplace",
+  "displayName": "CipherHealth Google Marketplace",
+  "description": "Google Workspace MCP tools via the CipherHealth Google Marketplace proxy — Calendar, Gmail, Drive, and related integrations.",
+  "version": "1.0.0",
+  "author": {
+    "name": "CipherHealth"
+  },
+  "keywords": ["google", "gmail", "calendar", "drive", "mcp", "cipherhealth"],
+  "license": "UNLICENSED",
+  "skills": "./skills/",
+  "mcp": "./mcp.json"
+}

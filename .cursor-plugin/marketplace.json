@@ -5,8 +5,8 @@
     "name": "SolarCS"
   },
   "metadata": {
-    "description": "CipherHealth trial MCP plugins — Salesforce, ZoomInfo, and Seismic.",
-    "version": "2.0.0",
+    "description": "CipherHealth trial MCP plugins — Salesforce, ZoomInfo, Seismic, and Google Marketplace.",
+    "version": "2.1.0",
     "pluginRoot": "plugins"
   },
   "plugins": [
@@ -24,6 +24,11 @@
       "name": "cipherhealth-seismic",
       "source": "seismic",
       "description": "Seismic MCP for CipherHealth sales content and enablement assets."
+    },
+    {
+      "name": "cipherhealth-google-marketplace",
+      "source": "google",
+      "description": "Google Workspace MCP tools via the CipherHealth Google Marketplace proxy."
     }
   ]
 }

@@ -14,7 +14,7 @@ Granting GitHub access to all org members does **not** install the plugin. Admin
 ## Admin checklist
 
 1. **Cursor Dashboard → Settings → Plugins → Team Marketplaces**
-2. Confirm all three plugins are listed: **CipherHealth Salesforce**, **CipherHealth ZoomInfo**, **CipherHealth Seismic**.
+2. Confirm all plugins are listed: **CipherHealth Salesforce**, **CipherHealth ZoomInfo**, **CipherHealth Seismic**, **CipherHealth Google Marketplace**.
 3. Set **Marketplace Access** to **All Members** (or a group that includes every trial user).
 4. Set the plugin to **Required** (auto-install) or **Optional** (user installs from Customize).
 5. Click **Save** — changes are not live until saved.

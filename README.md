@@ -1,6 +1,6 @@
 # CipherHealth Cursor Plugins
 
-Private team marketplace for the CipherHealth trial. Three plugins — **Salesforce**, **ZoomInfo**, and **Seismic** — each with its own MCP server and setup skill.
+Private team marketplace for the CipherHealth trial. Four plugins — **Salesforce**, **ZoomInfo**, **Seismic**, and **Google Marketplace** — each with its own MCP server and setup skill.
 
 **Repo:** [github.com/SolarCS/cursor-plugins](https://github.com/SolarCS/cursor-plugins)
 
@@ -9,10 +9,11 @@ Private team marketplace for the CipherHealth trial. Three plugins — **Salesfo
 | Plugin | MCP server | Auth |
 |--------|------------|------|
 | **CipherHealth Salesforce** | `platform/sobject-reads` (read-only CRM) | OAuth on connect (Consumer Key bundled) |
-| **CipherHealth ZoomInfo** | `mcp.zoominfo.com` | OAuth on connect |
-| **CipherHealth Seismic** | `mcp.seismic.com/.../cipherhealth.com` | OAuth on connect |
+| **CipherHealth ZoomInfo** | `mcp.zoominfo.com` via `mcp-remote` | OAuth on connect (requires **Node.js**) |
+| **CipherHealth Seismic** | `mcp.seismic.com/.../cipherhealth.com` | Seismic MCP app **Client ID** + OAuth |
+| **CipherHealth Google Marketplace** | `cipher-mcp-365212235619.us-central1.run.app/mcp` | OAuth on connect |
 
-No env vars required. Each user connects via **Settings → Tools & MCP → Connect**.
+Salesforce has the Consumer Key bundled. Seismic requires env vars from a Seismic App Registry MCP app. ZoomInfo requires Node.js for the OAuth bridge. Google uses the CipherHealth marketplace proxy — connect via OAuth in Cursor.
 
 ## Admin: publish to team marketplace
 
@@ -20,7 +21,7 @@ No env vars required. Each user connects via **Settings → Tools & MCP → Conn
 2. **Cursor Dashboard → Settings → Plugins → Team Marketplaces**
 3. **Import from Repo** (or **Refresh** if already imported) → `https://github.com/SolarCS/cursor-plugins`
 4. Grant the **Cursor GitHub App** read access to this repo.
-5. Cursor reads `.cursor-plugin/marketplace.json` and discovers all three plugins.
+5. Cursor reads `.cursor-plugin/marketplace.json` and discovers all four plugins.
 6. Set **Marketplace Access** to **All Members**.
 7. Mark each plugin **Required** (or **Optional** per role) → **Save**.
 
@@ -31,7 +32,7 @@ See [TEAM-TROUBLESHOOTING.md](./TEAM-TROUBLESHOOTING.md) if plugins work for adm
 ## Trial user: first run
 
 1. Plugins auto-install (if **Required**).
-2. **Settings → Tools & MCP → Connect** for **Salesforce**, **zoominfo**, and **Seismic**.
+2. **Settings → Tools & MCP → Connect** for **Salesforce**, **zoominfo**, **Seismic**, and **google**.
 3. Test in chat.
 
 ## Skills included
@@ -41,6 +42,7 @@ See [TEAM-TROUBLESHOOTING.md](./TEAM-TROUBLESHOOTING.md) if plugins work for adm
 | Salesforce | `salesforce-setup`, `salesforce-queries` |
 | ZoomInfo | `zoominfo-setup` |
 | Seismic | `seismic-setup` |
+| Google Marketplace | `google-marketplace-setup` |
 
 ## Repository structure
 
@@ -57,6 +59,10 @@ plugins/
     mcp.json
     skills/
   seismic/
+    .cursor-plugin/plugin.json
+    mcp.json
+    skills/
+  google/
     .cursor-plugin/plugin.json
     mcp.json
     skills/
