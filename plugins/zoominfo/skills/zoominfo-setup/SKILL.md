@@ -8,26 +8,34 @@ description: >-
 
 # CipherHealth ZoomInfo MCP setup
 
-## 1. Connect in Cursor
+This plugin uses the **`mcp-remote` bridge** — Cursor's native HTTP OAuth often fails for ZoomInfo's server.
+
+## 1. Prerequisites
+
+- **Node.js** installed (`node` and `npx` on your PATH). Install via [nodejs.org](https://nodejs.org) or `brew install node`.
+- A ZoomInfo account with MCP/API access.
+
+## 2. Connect in Cursor
 
 1. **Settings → Tools & MCP**
 2. Find **zoominfo** (from the CipherHealth ZoomInfo plugin)
 3. Toggle on if disabled
-4. Click **Connect** and sign in with your ZoomInfo account in the browser
+4. Click **Connect** — a browser window opens for ZoomInfo sign-in
+5. Approve permissions
 
-No API keys or env vars are required.
+On first connect, `npx` downloads `mcp-remote` automatically.
 
-## 2. Verify
+## 3. Verify
 
-After Connect, ZoomInfo tools should appear. Try a simple lookup in chat, e.g. "Find Acme Health in ZoomInfo."
+After Connect, ZoomInfo tools should appear. Try: "Find Acme Health in ZoomInfo."
 
 ## Common failures
 
 | Symptom | Fix |
 |---------|-----|
-| Server errored | Connect via **Settings → Tools & MCP**, not chat |
-| OAuth fails | Use your personal ZoomInfo credentials with MCP/API access |
-| Tools missing | Plugin not installed — check team marketplace **Required** setting |
-| Connect loop | Toggle server off/on to re-trigger OAuth |
+| Server errored immediately | Install Node.js, then restart Cursor |
+| `npx: command not found` | Add Node to PATH or reinstall Node.js |
+| OAuth fails | Use personal ZoomInfo credentials with MCP access |
+| Connect loop | Toggle server off/on; delete `~/.cursor/plugins/cache/` entries and retry |
 
-If native OAuth fails, see the [ZoomInfo MCP plugin README](https://github.com/Zoominfo/zoominfo-mcp-plugin) for the `mcp-remote` bridge fallback (requires Node.js).
+See the [ZoomInfo MCP plugin](https://github.com/Zoominfo/zoominfo-mcp-plugin) for upstream docs.

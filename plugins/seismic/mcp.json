@@ -1,7 +1,12 @@
 {
   "mcpServers": {
     "Seismic": {
-      "url": "https://mcp.seismic.com/v1/tenants/cipherhealth.com"
+      "url": "https://mcp.seismic.com/v1/tenants/cipherhealth.com",
+      "auth": {
+        "CLIENT_ID": "${env:SEISMIC_MCP_CLIENT_ID}",
+        "CLIENT_SECRET": "${env:SEISMIC_MCP_CLIENT_SECRET}",
+        "scopes": ["seismic.mcp", "offline_access"]
+      }
     }
   }
 }
